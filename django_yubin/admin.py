@@ -2,7 +2,7 @@
 # encoding: utf-8
 # ----------------------------------------------------------------------------
 
-from django.conf.urls import url
+from django.urls import re_path
 from django.contrib import admin
 
 try:
@@ -56,13 +56,13 @@ class Message(admin.ModelAdmin):
     def get_urls(self):
         urls = super(Message, self).get_urls()
         custom_urls = [
-            url(r'^mail/(?P<pk>\d+)/$',
+            re_path(r'^mail/(?P<pk>\d+)/$',
                 self.admin_site.admin_view(self.detail_view),
                 name='mail_detail'),
-            url('^mail/attachment/(?P<pk>\d+)/(?P<firma>[0-9a-f]{32})/$',
+            re_path('^mail/attachment/(?P<pk>\d+)/(?P<firma>[0-9a-f]{32})/$',
                 self.admin_site.admin_view(self.download_view),
                 name="mail_download"),
-            url('^mail/html/(?P<pk>\d+)/$',
+            re_path('^mail/html/(?P<pk>\d+)/$',
                 self.admin_site.admin_view(self.html_view),
                 name="mail_html"),
         ]

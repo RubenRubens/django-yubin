@@ -1,11 +1,11 @@
 from django.contrib import admin
-from django.conf.urls import include, url
+from django.urls import include, re_path
 
 from .views import IndexView
 
 
 urlpatterns = [
-    url(r'^$', IndexView.as_view(), name='home'),
-    url(r'^yubin/', include('django_yubin.urls')),
-    url(r'^admin/', admin.site.urls),
+    re_path(r'^$', IndexView.as_view(), name='home'),
+    re_path(r'^yubin/', include('django_yubin.urls')),
+    re_path(r'^admin/', admin.site.urls),
 ]
